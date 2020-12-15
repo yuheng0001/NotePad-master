@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_color"
+        android:title="@string/menu_color"
+        android:icon="@drawable/ic_menu_color"
+        android:showAsAction="always"/>
+    <item android:id="@+id/menu_save"
+          android:icon="@drawable/ic_menu_save"
+          android:alphabeticShortcut='s'
+          android:title="@string/menu_save"
+        app:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/menu_revert"
+          android:icon="@drawable/ic_menu_revert"
+          android:title="@string/menu_revert" />
+    <item android:id="@+id/menu_delete"
+          android:icon="@drawable/ic_menu_delete"
+          android:title="@string/menu_delete"
+        app:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/menu_export"
+        android:title="@string/menu_export" />
+    <item android:title="@string/menu_Insertpicture"
+        android:icon="@android:drawable/ic_menu_gallery"
+        android:showAsAction="always">
+        <menu>
+            <item
+                android:title="@string/PhotoAlbum"
+                android:id="@+id/insert_album"
+                android:icon="@android:drawable/ic_menu_gallery">
+            </item>
+            <item
+                android:title="@string/photograph"
+                android:id="@+id/insert_camera"
+                android:icon="@android:drawable/ic_menu_camera">
+            </item>
+        </menu>
+    </item>
+</menu>
