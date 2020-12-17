@@ -537,7 +537,7 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
         // If the values map doesn't contain the modification date, sets the value to the current
         // time.
         if (values.containsKey(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE) == false) {
-            values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, now);
+            values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, dateTime);
         }
 
         // If the values map doesn't contain a title, sets the value to the default title.

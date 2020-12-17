@@ -123,8 +123,7 @@
         <activity android:name=".NoteColor"
             android:theme="@android:style/Theme.Holo.Light.Dialog"
             android:label="ChangeColor"
-            android:windowSoftInputMode="stateVisible">
-        </activity>
+            android:windowSoftInputMode="stateVisible"/>
 
 
         <activity android:name="NotesLiveFolder" android:label="@string/live_folder_name"
@@ -136,10 +135,8 @@
         </activity>
 
     </application>
+    <!--权限申请-->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>

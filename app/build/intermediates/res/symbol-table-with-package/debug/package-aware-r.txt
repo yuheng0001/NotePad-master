@@ -796,6 +796,7 @@ drawable ic_menu_edit
 drawable ic_menu_revert
 drawable ic_menu_save
 drawable live_folder_notes
+drawable new_app_note
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low
@@ -957,8 +958,6 @@ id ignore
 id ignoreRequest
 id image
 id info
-id insert_album
-id insert_camera
 id invisible
 id italic
 id jumpToEnd

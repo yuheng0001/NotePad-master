@@ -78,11 +78,7 @@ import java.util.regex.Pattern;
 public class NoteEditor extends Activity {
     // For logging and debugging purposes
     private static final String TAG = "NoteEditor";
-    private static final int PHOTO_FROM_GALLERY = 1;
-    private static final int PHOTO_FROM_CAMERA = 2;
-    private static final String regex="content://com.android.providers.media.documents/"
-            +"document/image%\\w{4}";
-    private static final String reg="file:///storage/emulated/0/\\d+.jpg";
+
     /*
      * Creates a projection that returns the note ID and the note contents.
      */
@@ -105,11 +101,9 @@ public class NoteEditor extends Activity {
     // Global mutable variables
     private int mState;
     private Uri mUri;
-    private Uri imageUri;
     private Cursor mCursor;
     private EditText mText;
     private String mOriginalContent;
-    private boolean flag=false;
 
     /**
      * Defines a custom EditText View that draws lines between each line of text that is displayed.
@@ -319,14 +313,25 @@ public class NoteEditor extends Activity {
 
 
 
+
+
+
+
+            // Gets the note text from the Cursor and puts it in the TextView, but doesn't change
+            // the text cursor's position.
+            int colNoteIndex = mCursor.getColumnIndex(NotePad.Notes.COLUMN_NAME_NOTE);
+            String note = mCursor.getString(colNoteIndex);
+            mText.setTextKeepState(note);
+
+            
+
+            // Stores the original note text, to allow the user to revert changes.
+            if (mOriginalContent == null) {
+                mOriginalContent = note;
+            }
+
+
             int x = mCursor.getInt(mCursor.getColumnIndex(NotePad.Notes.COLUMN_NAME_BACK_COLOR));
-            /**
-             * 白 255 255 255
-             * 黄 247 216 133
-             * 蓝 165 202 237
-             * 绿 161 214 174
-             * 红 244 149 133
-             */
             switch (x){
                 case NotePad.Notes.DEFAULT_COLOR:
                     mText.setBackgroundColor(Color.rgb(255,255,255));
@@ -348,47 +353,6 @@ public class NoteEditor extends Activity {
                     break;
             }
 
-
-
-            // Gets the note text from the Cursor and puts it in the TextView, but doesn't change
-            // the text cursor's position.
-            int colNoteIndex = mCursor.getColumnIndex(NotePad.Notes.COLUMN_NAME_NOTE);
-            String note = mCursor.getString(colNoteIndex);
-            ArrayList<String> contentList=new ArrayList<>();//存放图片路径
-            ArrayList<Integer> startList=new ArrayList<>();//存放图片路径起点位置
-            ArrayList<Integer> endList=new ArrayList<>();//存放图片路径终点位置
-            Pattern p=Pattern.compile(regex);
-            Matcher m=p.matcher(note);
-            //当匹配到图库相应资源地址，将对应信息存入List
-            while(m.find()){
-                contentList.add(m.group());
-                startList.add(m.start());
-                endList.add(m.end());
-                flag=true;
-            }
-            p=Pattern.compile(reg);
-            m=p.matcher(note);
-            //当匹配到拍照的图片相应资源地址，将对应信息存入List
-            while(m.find()){
-                contentList.add(m.group());
-                startList.add(m.start());
-                endList.add(m.end());
-                flag=true;
-            }
-            //判断文本中是否有图片资源地址
-            if(!flag){
-                mText.setText(note);
-            }else{
-                pushPicture(note,contentList,startList,endList);
-            }
-
-            
-
-            // Stores the original note text, to allow the user to revert changes.
-            if (mOriginalContent == null) {
-                mOriginalContent = note;
-            }
-
         /*
          * Something is wrong. The Cursor should always contain data. Report an error in the
          * note.
@@ -399,30 +363,7 @@ public class NoteEditor extends Activity {
         }
     }
 
-    private void pushPicture(String note,ArrayList<String> contentList,ArrayList<Integer> startList,ArrayList<Integer> endList) {
-        //创建一个SpannableString对象，以便插入用ImageSpan对象封装的图像
-        SpannableString spannableString = new SpannableString(note);
-        for (int i = 0; i < contentList.size(); i++) {
-            Uri uri = Uri.parse(contentList.get(i));
-            Bitmap bitmap = null;
-            try {
-                Bitmap originalBitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
-                bitmap = resizeImage(originalBitmap, 200, 200);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            if (bitmap != null) {
-                //根据Bitmap对象创建ImageSpan对象
-                ImageSpan imageSpan = new ImageSpan(NoteEditor.this, bitmap);
 
-                //  用ImageSpan对象替换face
-                spannableString.setSpan(imageSpan, startList.get(i), endList.get(i), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-        }
-        mText.setText("");
-        Editable edit_text = mText.getEditableText();
-        edit_text.append(spannableString);
-    }
 
     /**
      * This method is called when an Activity loses focus during its normal operation, and is then
@@ -663,12 +604,14 @@ public class NoteEditor extends Activity {
     private final void updateNote(String text, String title) {
 
         // Sets up a map to contain values to be updated in the provider.
+
+        //将时间变为标准格式使用
         ContentValues values = new ContentValues();
         Date nowTime = new Date(System.currentTimeMillis());
         SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         sdFormatter.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));
-        String retStrFormatNowDate = sdFormatter.format(nowTime);
-        values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, retStrFormatNowDate);
+        String reFormatNowDate = sdFormatter.format(nowTime);
+        values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, reFormatNowDate);
 
         // If the action is to insert a new note, this creates an initial title for it.
         if (mState == STATE_INSERT) {
@@ -757,129 +700,5 @@ public class NoteEditor extends Activity {
         }
     }
 
-    //从相册取图片
-    public void getPhoto() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-        startActivityForResult(intent, PHOTO_FROM_GALLERY);
-    }
-    //拍照取照片
-    public void takeCamera() {
-        /***
-         **申请动态权限
-         **/
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions( this, new String[] { Manifest.permission.CAMERA }, PHOTO_FROM_CAMERA);
-        }
-        else {
-            File file=new File(Environment.getExternalStorageDirectory(),System.currentTimeMillis()+".jpg");
-            try {
-                if(file.exists()){
-                    file.delete();
-                }
-                file.createNewFile();
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-            //将文件路径转化为uri传入Intent
-            imageUri=Uri.fromFile(file);
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
-            startActivityForResult(intent, PHOTO_FROM_CAMERA);
-        }
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        ContentResolver resolver = getContentResolver();
-        super.onActivityResult(requestCode, resultCode, data);
-        //第一层switch
-        switch (requestCode) {
-            case PHOTO_FROM_GALLERY:
-                //第二层switch
-                switch (resultCode) {
-                    case RESULT_OK:
-                        if (data != null) {
-                            Uri uri = data.getData();//获取Intent uri
-                            Bitmap bitmap = null;
-                            //判断该路径是否存在
-                            try {
-                                Bitmap originalBitmap = BitmapFactory.decodeStream(resolver.openInputStream(uri));
-                                bitmap = resizeImage(originalBitmap, 200, 200);//图片缩放
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                            if(bitmap != null){//如果图片存在
-                                //将选择的图片追加到EditText中光标所在位置
-                                int index = mText.getSelectionStart(); //获取光标所在位置
-                                Editable edit_text = mText.getEditableText();//编辑文本框
-                                if(index <0 || index >= edit_text.length()){
-                                    edit_text.append(uri.toString());
-                                    updateNote(mText.getText().toString(),null);//更新到数据库
-                                }else{
-                                    edit_text.insert(index,uri.toString());
-                                    updateNote(mText.getText().toString(),null);//更新到数据库
-                                }
-                            }else{
-                                Toast.makeText(NoteEditor.this, "获取图片失败", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        break;
-                    case RESULT_CANCELED:
-                        break;
-                }
-                break;
-            case PHOTO_FROM_CAMERA:
-                if (resultCode == RESULT_OK) {
-                    Bitmap originalBitmap1=null;
-                    //判断图片是否存在
-                    try{
-                        originalBitmap1=BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
-                    }catch (FileNotFoundException e){
-                        e.printStackTrace();
-                    }
-                    if(originalBitmap1 != null){//如果图片存在保存URI
-                        //将选择的图片追加到EditText中光标所在位置
-                        int index = mText.getSelectionStart(); //获取光标所在位置
-                        Editable edit_text = mText.getEditableText();//编辑文本框
-                        if(index <0 || index >= edit_text.length()){
-                            edit_text.append(imageUri.toString());
-                            updateNote(mText.getText().toString(),null);//更新到数据库
-                        }else{
-                            edit_text.insert(index, imageUri.toString());
-                            updateNote(mText.getText().toString(),null);//更新到数据库
-                        }
-                    }else{
-                        Toast.makeText(NoteEditor.this, "获取图片失败", Toast.LENGTH_SHORT).show();
-                    }
-
-                } else {
-                    Log.e("result", "is not ok" + resultCode);
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
-    private Bitmap resizeImage(Bitmap originalBitmap, int newWidth, int newHeight){
-        int width = originalBitmap.getWidth();
-        int height = originalBitmap.getHeight();
-        //定义欲转换成的宽、高
-//            int newWidth = 200;
-//            int newHeight = 200;
-        //计算宽、高缩放率
-        float scanleWidth = (float)newWidth/width;
-        float scanleHeight = (float)newHeight/height;
-        //创建操作图片用的matrix对象 Matrix
-        Matrix matrix = new Matrix();
-        // 缩放图片动作
-        matrix.postScale(scanleWidth,scanleHeight);
-        //旋转图片 动作
-        //matrix.postRotate(45);
-        // 创建新的图片Bitmap
-        Bitmap resizedBitmap = Bitmap.createBitmap(originalBitmap,0,0,width,height,matrix,true);
-        return resizedBitmap;
-    }
 }

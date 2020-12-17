@@ -270,6 +270,64 @@ public class NotesList extends ListActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
+            //按时间排序
+            case R.id.menu_sort1:
+                cursor = managedQuery(
+                        getIntent().getData(),            // Use the default content URI for the provider.
+                        PROJECTION,                       // Return the note ID and title for each note. and modifcation date
+                        null,                             // No where clause, return all records.
+                        null,                             // No where clause, therefore no where column values.
+                        NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE  // Use the default sort order.
+                );
+                adapter = new MyCursorAdapter(
+                        this,
+                        R.layout.noteslist_item,
+                        cursor,
+                        dataColumns,
+                        viewIDs
+                );
+                setListAdapter(adapter);
+                return true;
+
+            //按标题排序
+            case R.id.menu_sort2:
+                cursor = managedQuery(
+                        getIntent().getData(),            // Use the default content URI for the provider.
+                        PROJECTION,                       // Return the note ID and title for each note. and modifcation date
+                        null,                             // No where clause, return all records.
+                        null,                             // No where clause, therefore no where column values.
+                        NotePad.Notes.COLUMN_NAME_TITLE // Use the default sort order.
+                );
+
+                adapter = new MyCursorAdapter(
+                        this,
+                        R.layout.noteslist_item,
+                        cursor,
+                        dataColumns,
+                        viewIDs
+                );
+                setListAdapter(adapter);
+                return true;
+
+            //按颜色排序
+            case R.id.menu_sort3:
+                cursor = managedQuery(
+                        getIntent().getData(),            // Use the default content URI for the provider.
+                        PROJECTION,                       // Return the note ID and title for each note. and modifcation date
+                        null,                             // No where clause, return all records.
+                        null,                             // No where clause, therefore no where column values.
+                        NotePad.Notes.COLUMN_NAME_BACK_COLOR // Use the default sort order.
+                );
+                adapter = new MyCursorAdapter(
+                        this,
+                        R.layout.noteslist_item,
+                        cursor,
+                        dataColumns,
+                        viewIDs
+                );
+                setListAdapter(adapter);
+                return true;
+
             case R.id.menu_search:
                 Intent intent = new Intent();
                 intent.setClass(NotesList.this,NoteSearch.class);

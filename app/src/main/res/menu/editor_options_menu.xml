@@ -19,20 +19,4 @@
         app:showAsAction="ifRoom|withText" />
     <item android:id="@+id/menu_export"
         android:title="@string/menu_export" />
-    <item android:title="@string/menu_Insertpicture"
-        android:icon="@android:drawable/ic_menu_gallery"
-        android:showAsAction="always">
-        <menu>
-            <item
-                android:title="@string/PhotoAlbum"
-                android:id="@+id/insert_album"
-                android:icon="@android:drawable/ic_menu_gallery">
-            </item>
-            <item
-                android:title="@string/photograph"
-                android:id="@+id/insert_camera"
-                android:icon="@android:drawable/ic_menu_camera">
-            </item>
-        </menu>
-    </item>
 </menu>

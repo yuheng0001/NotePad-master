@@ -28,6 +28,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:gravity="center_vertical"
         android:paddingLeft="5dip"
+        android:layout_marginLeft="5dip"
         android:textColor="#000"
         android:singleLine="true"
         />

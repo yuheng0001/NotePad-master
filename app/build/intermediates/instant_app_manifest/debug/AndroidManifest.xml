@@ -30,12 +30,9 @@
     <uses-sdk
         android:minSdkVersion="19"
         android:targetSdkVersion="28" />
-
+    <!-- 权限申请 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -166,8 +163,7 @@
             android:name="com.example.android.notepad.NoteColor"
             android:label="ChangeColor"
             android:theme="@android:style/Theme.Holo.Light.Dialog"
-            android:windowSoftInputMode="stateVisible" >
-        </activity>
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name="com.example.android.notepad.NotesLiveFolder"
             android:icon="@drawable/live_folder_notes"

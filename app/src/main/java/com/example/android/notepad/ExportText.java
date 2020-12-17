@@ -22,6 +22,7 @@ public class ExportText extends Activity {
             NotePad.Notes.COLUMN_NAME_NOTE, // 2
             NotePad.Notes.COLUMN_NAME_CREATE_DATE, // 3
             NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, // 4
+            NotePad.Notes.COLUMN_NAME_BACK_COLOR, //5
     };
     //读取出的值放入这些变量
     private String TITLE;
@@ -36,7 +37,9 @@ public class ExportText extends Activity {
     private Uri mUri;
     //关于返回与保存按钮的一个特殊标记，返回的话不执行导出，点击按钮才导出
     private boolean flag = false;
+
     private static final int COLUMN_INDEX_TITLE = 1;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.export_text);

@@ -12,6 +12,10 @@
         "source": "C:\\Users\\lenovo\\.gradle\\caches\\transforms-2\\files-2.1\\c1210059822c0f4a6a60a6d67e3f9ee5\\appcompat-1.2.0\\res\\color-v23\\abc_tint_switch_track.xml"
     },
     {
+        "merged": "G:\\NotePad-master\\app\\build\\intermediates\\res\\merged\\debug\\drawable_new_app_note.png.flat",
+        "source": "G:\\NotePad-master\\app\\src\\main\\res\\drawable\\new_app_note.png"
+    },
+    {
         "merged": "G:\\NotePad-master\\app\\build\\intermediates\\res\\merged\\debug\\drawable_tooltip_frame_light.xml.flat",
         "source": "C:\\Users\\lenovo\\.gradle\\caches\\transforms-2\\files-2.1\\c1210059822c0f4a6a60a6d67e3f9ee5\\appcompat-1.2.0\\res\\drawable\\tooltip_frame_light.xml"
     },
