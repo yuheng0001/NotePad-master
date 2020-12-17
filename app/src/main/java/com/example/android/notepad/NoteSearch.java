@@ -17,8 +17,8 @@ public class NoteSearch extends ListActivity  implements SearchView.OnQueryTextL
     private static final String[] PROJECTION = new String[] {
             NotePad.Notes._ID, // 0
             NotePad.Notes.COLUMN_NAME_TITLE, // 1
-            //扩展 显示时间 颜色
             NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, // 2
+            NotePad.Notes.COLUMN_NAME_BACK_COLOR  //3
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +37,14 @@ public class NoteSearch extends ListActivity  implements SearchView.OnQueryTextL
         return false;
     }
     @Override
-    public boolean onQueryTextChange(String newText) {
+    public boolean onQueryTextChange(String s) {
         String selection = NotePad.Notes.COLUMN_NAME_TITLE + " Like ? ";
-        String[] selectionArgs = { "%"+newText+"%" };
+        String[] selectionArgs = { "%"+s+"%" };
         Cursor cursor = managedQuery(
                 getIntent().getData(),            // Use the default content URI for the provider.
                 PROJECTION,                       // Return the note ID and title for each note. and modifcation date
-                selection,                        // 条件左边
-                selectionArgs,                    // 条件右边
+                selection,
+                selectionArgs,
                 NotePad.Notes.DEFAULT_SORT_ORDER  // Use the default sort order.
         );
         String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE ,  NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE };

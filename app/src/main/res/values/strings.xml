@@ -41,7 +41,7 @@
     <string name="error_message">Error loading note</string>
     <string name="nothing_to_save">There is nothing to save</string>
     <string name="menu_search">Search</string>
-    <string name="title_notes_search">title_search</string>
+    <string name="title_notes_search">Search</string>
     <string name="menu_export">Export</string>
     <string name="export_ok">导出确认</string>
     <string name="Export_name">Export</string>
