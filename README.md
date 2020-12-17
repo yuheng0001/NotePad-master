@@ -1,2 +1,7 @@
-# NotePad
-This is an AndroidStudio rebuild of google SDK sample NotePad
+# 期中实验
+---
+## 增加时间戳
+
+在NotePad原应用中，笔记列表只显示了笔记的标题。如图3、图6。要对它做时间扩展，可以把时间放在标题的下方。<br>
+首先，找到列表中item的布局：noteslist_item.xml。<br>
+在这个布局文件中，能看到一个TextView，这个便是笔记列表的标题item了。<br>
