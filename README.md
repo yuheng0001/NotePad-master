@@ -11,5 +11,7 @@
 ![](https://github.com/yuheng0001/NotePad-master/blob/master/image/3.png)<br>
 在dataColumns，viewIDs中添加时间部分：
 ![](https://github.com/yuheng0001/NotePad-master/blob/master/image/4.png)<br>
+最后在NotePadProvider.java中的insert方法和NoteEditor.java中的updateNote方法中添加时间转换<br>
+![](https://github.com/yuheng0001/NotePad-master/blob/master/image/5.png)<br>
 效果图如下：<br>
 ![](https://github.com/yuheng0001/NotePad-master/blob/master/image/1.png)<br>
