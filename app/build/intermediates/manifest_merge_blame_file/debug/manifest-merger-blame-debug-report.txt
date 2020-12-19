@@ -239,48 +239,48 @@
 150            android:label="@string/title_notes_search" >
 150-->G:\NotePad-master\app\src\main\AndroidManifest.xml:113:13-55
 151        </activity>
-152        <!-- 导出activity -->
-153        <activity
-153-->G:\NotePad-master\app\src\main\AndroidManifest.xml:116:9-120:20
-154            android:name="com.example.android.notepad.ExportText"
-154-->G:\NotePad-master\app\src\main\AndroidManifest.xml:116:19-45
-155            android:label="@string/Export_name"
-155-->G:\NotePad-master\app\src\main\AndroidManifest.xml:117:13-48
-156            android:theme="@android:style/Theme.Holo.Dialog"
-156-->G:\NotePad-master\app\src\main\AndroidManifest.xml:118:13-61
-157            android:windowSoftInputMode="stateVisible" >
-157-->G:\NotePad-master\app\src\main\AndroidManifest.xml:119:13-55
-158        </activity>
-159
-160        <!-- 更换背景颜色 -->
-161        <activity
-161-->G:\NotePad-master\app\src\main\AndroidManifest.xml:123:9-126:57
-162            android:name="com.example.android.notepad.NoteColor"
-162-->G:\NotePad-master\app\src\main\AndroidManifest.xml:123:19-44
-163            android:label="ChangeColor"
-163-->G:\NotePad-master\app\src\main\AndroidManifest.xml:125:13-40
-164            android:theme="@android:style/Theme.Holo.Light.Dialog"
-164-->G:\NotePad-master\app\src\main\AndroidManifest.xml:124:13-67
-165            android:windowSoftInputMode="stateVisible" />
-165-->G:\NotePad-master\app\src\main\AndroidManifest.xml:126:13-55
-166        <activity
-166-->G:\NotePad-master\app\src\main\AndroidManifest.xml:129:9-135:20
-167            android:name="com.example.android.notepad.NotesLiveFolder"
-167-->G:\NotePad-master\app\src\main\AndroidManifest.xml:129:19-49
-168            android:icon="@drawable/live_folder_notes"
-168-->G:\NotePad-master\app\src\main\AndroidManifest.xml:130:13-55
-169            android:label="@string/live_folder_name" >
-169-->G:\NotePad-master\app\src\main\AndroidManifest.xml:129:50-90
-170            <intent-filter>
-170-->G:\NotePad-master\app\src\main\AndroidManifest.xml:131:13-134:29
-171                <action android:name="android.intent.action.CREATE_LIVE_FOLDER" />
-171-->G:\NotePad-master\app\src\main\AndroidManifest.xml:132:17-83
-171-->G:\NotePad-master\app\src\main\AndroidManifest.xml:132:25-80
-172
-173                <category android:name="android.intent.category.DEFAULT" />
-173-->G:\NotePad-master\app\src\main\AndroidManifest.xml:46:17-76
-173-->G:\NotePad-master\app\src\main\AndroidManifest.xml:46:27-73
-174            </intent-filter>
+152
+153        <!-- 更换背景颜色 -->
+154        <activity
+154-->G:\NotePad-master\app\src\main\AndroidManifest.xml:118:9-121:57
+155            android:name="com.example.android.notepad.NoteColor"
+155-->G:\NotePad-master\app\src\main\AndroidManifest.xml:118:19-44
+156            android:label="ChangeColor"
+156-->G:\NotePad-master\app\src\main\AndroidManifest.xml:120:13-40
+157            android:theme="@android:style/Theme.Holo.Light.Dialog"
+157-->G:\NotePad-master\app\src\main\AndroidManifest.xml:119:13-67
+158            android:windowSoftInputMode="stateVisible" />
+158-->G:\NotePad-master\app\src\main\AndroidManifest.xml:121:13-55
+159        <activity
+159-->G:\NotePad-master\app\src\main\AndroidManifest.xml:124:9-130:20
+160            android:name="com.example.android.notepad.NotesLiveFolder"
+160-->G:\NotePad-master\app\src\main\AndroidManifest.xml:124:19-49
+161            android:icon="@drawable/live_folder_notes"
+161-->G:\NotePad-master\app\src\main\AndroidManifest.xml:125:13-55
+162            android:label="@string/live_folder_name" >
+162-->G:\NotePad-master\app\src\main\AndroidManifest.xml:124:50-90
+163            <intent-filter>
+163-->G:\NotePad-master\app\src\main\AndroidManifest.xml:126:13-129:29
+164                <action android:name="android.intent.action.CREATE_LIVE_FOLDER" />
+164-->G:\NotePad-master\app\src\main\AndroidManifest.xml:127:17-83
+164-->G:\NotePad-master\app\src\main\AndroidManifest.xml:127:25-80
+165
+166                <category android:name="android.intent.category.DEFAULT" />
+166-->G:\NotePad-master\app\src\main\AndroidManifest.xml:46:17-76
+166-->G:\NotePad-master\app\src\main\AndroidManifest.xml:46:27-73
+167            </intent-filter>
+168        </activity>
+169        <!-- 导出activity -->
+170        <activity
+170-->G:\NotePad-master\app\src\main\AndroidManifest.xml:132:9-136:20
+171            android:name="com.example.android.notepad.ExportText"
+171-->G:\NotePad-master\app\src\main\AndroidManifest.xml:132:19-45
+172            android:label="@string/Export_name"
+172-->G:\NotePad-master\app\src\main\AndroidManifest.xml:133:13-48
+173            android:theme="@android:style/Theme.Holo.Dialog"
+173-->G:\NotePad-master\app\src\main\AndroidManifest.xml:134:13-61
+174            android:windowSoftInputMode="stateVisible" >
+174-->G:\NotePad-master\app\src\main\AndroidManifest.xml:135:13-55
 175        </activity>
 176    </application>
 177

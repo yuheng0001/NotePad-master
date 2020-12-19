@@ -20,13 +20,13 @@
         android:showAsAction="always" >
         <menu>
             <item
-                android:id="@+id/menu_sort1"
+                android:id="@+id/menu_sorttime"
                 android:title="@string/menu_sort1"/>
             <item
-                android:id="@+id/menu_sort2"
+                android:id="@+id/menu_sorttitle"
                 android:title="@string/menu_sort2"/>
             <item
-                android:id="@+id/menu_sort3"
+                android:id="@+id/menu_sortcolor"
                 android:title="@string/menu_sort3"/>
         </menu>
     </item>

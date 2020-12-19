@@ -149,13 +149,6 @@
             android:name="com.example.android.notepad.NoteSearch"
             android:label="@string/title_notes_search" >
         </activity>
-        <!-- 导出activity -->
-        <activity
-            android:name="com.example.android.notepad.ExportText"
-            android:label="@string/Export_name"
-            android:theme="@android:style/Theme.Holo.Dialog"
-            android:windowSoftInputMode="stateVisible" >
-        </activity>
 
         <!-- 更换背景颜色 -->
         <activity
@@ -172,6 +165,13 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <!-- 导出activity -->
+        <activity
+            android:name="com.example.android.notepad.ExportText"
+            android:label="@string/Export_name"
+            android:theme="@android:style/Theme.Holo.Dialog"
+            android:windowSoftInputMode="stateVisible" >
         </activity>
     </application>
 

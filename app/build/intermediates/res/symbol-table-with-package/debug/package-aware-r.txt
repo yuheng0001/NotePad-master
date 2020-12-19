@@ -978,9 +978,9 @@ id menu_revert
 id menu_save
 id menu_search
 id menu_sort
-id menu_sort1
-id menu_sort2
-id menu_sort3
+id menu_sortcolor
+id menu_sorttime
+id menu_sorttitle
 id message
 id middle
 id motion_base

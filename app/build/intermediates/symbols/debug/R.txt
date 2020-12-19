@@ -977,9 +977,9 @@ int id menu_revert 0x7f0700a3
 int id menu_save 0x7f0700a4
 int id menu_search 0x7f0700a5
 int id menu_sort 0x7f0700a6
-int id menu_sort1 0x7f0700a7
-int id menu_sort2 0x7f0700a8
-int id menu_sort3 0x7f0700a9
+int id menu_sortcolor 0x7f0700a7
+int id menu_sorttime 0x7f0700a8
+int id menu_sorttitle 0x7f0700a9
 int id message 0x7f0700aa
 int id middle 0x7f0700ab
 int id motion_base 0x7f0700ac

@@ -14,12 +14,11 @@ public class NoteColor extends Activity {
     private static final int COLUMN_INDEX_TITLE = 1;
     private static final String[] PROJECTION = new String[] {
             NotePad.Notes._ID, // 0
-            NotePad.Notes.COLUMN_NAME_BACK_COLOR,
+            NotePad.Notes.COLUMN_NAME_BACK_COLOR,//2
     };
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.note_color);
-        //从NoteEditor传入的uri
         mUri = getIntent().getData();
         mCursor = managedQuery(
                 mUri,        // The URI for the note that is to be retrieved.
@@ -31,7 +30,6 @@ public class NoteColor extends Activity {
     }
     @Override
     protected void onResume(){
-        //执行顺序在onCreate之后
         if (mCursor != null) {
             mCursor.moveToFirst();
             color = mCursor.getInt(COLUMN_INDEX_TITLE);
@@ -40,7 +38,6 @@ public class NoteColor extends Activity {
     }
     @Override
     protected void onPause() {
-        //执行顺序在finish()之后，将选择的颜色存入数据库
         super.onPause();
         ContentValues values = new ContentValues();
         values.put(NotePad.Notes.COLUMN_NAME_BACK_COLOR, color);
@@ -66,5 +63,4 @@ public class NoteColor extends Activity {
         color = NotePad.Notes.RED_COLOR;
         finish();
     }
-
 }

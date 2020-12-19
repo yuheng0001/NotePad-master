@@ -4168,9 +4168,9 @@ public final class R {
     public static final int menu_save=0x7f0700a4;
     public static final int menu_search=0x7f0700a5;
     public static final int menu_sort=0x7f0700a6;
-    public static final int menu_sort1=0x7f0700a7;
-    public static final int menu_sort2=0x7f0700a8;
-    public static final int menu_sort3=0x7f0700a9;
+    public static final int menu_sortcolor=0x7f0700a7;
+    public static final int menu_sorttime=0x7f0700a8;
+    public static final int menu_sorttitle=0x7f0700a9;
     public static final int message=0x7f0700aa;
     public static final int middle=0x7f0700ab;
     public static final int motion_base=0x7f0700ac;

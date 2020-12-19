@@ -18,6 +18,7 @@ package com.example.android.notepad;
 
 import com.example.android.notepad.NotePad;
 
+import android.Manifest;
 import android.app.ListActivity;
 import android.content.ClipboardManager;
 import android.content.ClipData;
@@ -25,6 +26,7 @@ import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,6 +40,13 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Displays a list of notes. Will display notes from the {@link Uri}
@@ -54,6 +63,11 @@ public class NotesList extends ListActivity {
     // For logging and debugging
     private static final String TAG = "NotesList";
 
+    String[] permissions = new String[]{Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    List<String> mPermissionList = new ArrayList<>();
+
+    private static final int PERMISSION_REQUEST = 1;
     /**
      * The columns needed by the cursor adapter
      */
@@ -77,6 +91,7 @@ public class NotesList extends ListActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        checkPermission();
         super.onCreate(savedInstanceState);
 
         // The user does not need to hold down the key to use menu shortcuts.
@@ -143,6 +158,35 @@ public class NotesList extends ListActivity {
         setListAdapter(adapter);
     }
 
+
+    private void checkPermission() {
+        mPermissionList.clear();
+        //判断哪些权限未授予
+        for (int i = 0; i < permissions.length; i++) {
+            if (ContextCompat.checkSelfPermission(this, permissions[i]) != PackageManager.PERMISSION_GRANTED) {
+                mPermissionList.add(permissions[i]);
+            }
+        }
+
+        if (mPermissionList.isEmpty()) {//未授予的权限为空，表示都授予了
+        } else {//请求权限方法
+            String[] permissions = mPermissionList.toArray(new String[mPermissionList.size()]);//将List转为数组
+            ActivityCompat.requestPermissions(NotesList.this, permissions, PERMISSION_REQUEST);
+        }
+    }
+
+    //这里不管用户是否拒绝，都进入首页，不再重复申请权限
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSION_REQUEST:
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                break;
+        }
+    }
     /**
      * Called when the user clicks the device's Menu button the first time for
      * this Activity. Android passes in a Menu object that is populated with items.
@@ -271,7 +315,7 @@ public class NotesList extends ListActivity {
         switch (item.getItemId()) {
 
             //按时间排序
-            case R.id.menu_sort1:
+            case R.id.menu_sorttime:
                 cursor = managedQuery(
                         getIntent().getData(),            // Use the default content URI for the provider.
                         PROJECTION,                       // Return the note ID and title for each note. and modifcation date
@@ -290,7 +334,7 @@ public class NotesList extends ListActivity {
                 return true;
 
             //按标题排序
-            case R.id.menu_sort2:
+            case R.id.menu_sorttitle:
                 cursor = managedQuery(
                         getIntent().getData(),            // Use the default content URI for the provider.
                         PROJECTION,                       // Return the note ID and title for each note. and modifcation date
@@ -310,7 +354,7 @@ public class NotesList extends ListActivity {
                 return true;
 
             //按颜色排序
-            case R.id.menu_sort3:
+            case R.id.menu_sortcolor:
                 cursor = managedQuery(
                         getIntent().getData(),            // Use the default content URI for the provider.
                         PROJECTION,                       // Return the note ID and title for each note. and modifcation date
